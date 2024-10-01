@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endpoints API de Agendamentos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 20px;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Endpoints API de Agendamentos</h1>
+      <div class="accordion" id="apiEndpoints">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              GET /servicos
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>
+                Lista todos os serviços. Opcionalmente, filtra por atendente.
+              </p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?servicos&atendente={{atendente}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "nome": "Serviço 1" },
+    { "id": 2, "nome": "Serviço 2" }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              GET /horarios
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Lista todos os horários disponíveis.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?horarios?atendente={{atendente}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "horario": "09:00" },
+    { "id": 2, "horario": "10:00" }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              GET /atendentes
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>
+                Lista todos os atendentes. Opcionalmente, filtra por
+                disponibilidade.
+              </p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?atendentes?somente_disponiveis=1</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "nome": "Atendente 1", "cargo": "Cargo 1", "disponivel": 1 },
+    { "id": 2, "nome": "Atendente 2", "cargo": "Cargo 2", "disponivel": 0 }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseFour"
+              aria-expanded="false"
+              aria-controls="collapseFour"
+            >
+              GET /agendar
+            </button>
+          </h2>
+          <div
+            id="collapseFour"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingFour"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Agenda um horário.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?agendar&nome={{nome}}&telefone={{telefone}}&servico={{servico}}&data={{data}}&horario={{horario}}&atendente={{atendente}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>{ "status": "success", "message": "Agendamento realizado com sucesso!" }</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFive">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseFive"
+              aria-expanded="false"
+              aria-controls="collapseFive"
+            >
+              GET /consultar
+            </button>
+          </h2>
+          <div
+            id="collapseFive"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingFive"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Consulta agendamentos pelo telefone.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?consultar?telefone={{telefone}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "nome": "Nome", "telefone": "999999999", "data_hora": "2023-10-12 09:00", "servico": "Serviço", "atendente": "Atendente" }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingSix">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseSix"
+              aria-expanded="false"
+              aria-controls="collapseSix"
+            >
+              GET /cancelar
+            </button>
+          </h2>
+          <div
+            id="collapseSix"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingSix"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Cancela um agendamento.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?cancelar?telefone={{telefone}}&data={{data}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>{ "status": "success", "message": "Agendamento cancelado com sucesso!" }</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingSeven">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseSeven"
+              aria-expanded="false"
+              aria-controls="collapseSeven"
+            >
+              GET /consultar_nome
+            </button>
+          </h2>
+          <div
+            id="collapseSeven"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingSeven"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Consulta agendamentos pelo nome.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?/consultar_nome?consultar_nome={{nome}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "nome": "Nome", "telefone": "999999999", "data_hora": "2023-10-12 09:00", "servico": "Serviço", "atendente": "Atendente" }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingEight">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseEight"
+              aria-expanded="false"
+              aria-controls="collapseEight"
+            >
+              GET /consultar_data_hora
+            </button>
+          </h2>
+          <div
+            id="collapseEight"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingEight"
+            data-bs-parent="#apiEndpoints"
+          >
+            <div class="accordion-body">
+              <p>Consulta agendamentos pela data e hora.</p>
+              <h5>Requisição:</h5>
+              <pre><code>GET {{api}}/api-agendamento.php?consultar_data_hora?consultar_data_hora={{data_hora}}</code></pre>
+              <h5>Resposta:</h5>
+              <pre><code>[
+    { "id": 1, "nome": "Nome", "telefone": "999999999", "data_hora": "2023-10-12 09:00", "servico": "Serviço", "atendente": "Atendente" }
+]</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
